@@ -156,14 +156,14 @@ Guillermo Orozco
 // ======= COMENTARIOS GOOGLE SHEETS =======
 let usuarioID = localStorage.getItem("usuarioID");
 if(!usuarioID){
-  usuarioID = "AKfycbyFujonEg8-RHoCeFH6Z1Hu0ft_aY5oSwq_pojIms3JyLt2XvZwDNB839r5I2umM7TraA"; // tu ID
+  usuarioID = "AKfycbxJvkACkg0bxTOptMsqBG4FDk9fddfEfVWVwEV8MUwKDi0NiJBX2HCEFeRLzz0c4ig1"; // tu nuevo ID
   localStorage.setItem("usuarioID", usuarioID);
 }
 
 let comentarios = [];
 
 function mostrarComentarios(){
-  fetch("https://script.google.com/macros/s/AKfycbyFujonEg8-RHoCeFH6Z1Hu0ft_aY5oSwq_pojIms3JyLt2XvZwDNB839r5I2umM7TraA/exec")
+  fetch("https://script.google.com/macros/s/AKfycbxJvkACkg0bxTOptMsqBG4FDk9fddfEfVWVwEV8MUwKDi0NiJBX2HCEFeRLzz0c4ig1/exec")
     .then(res => res.json())
     .then(data => {
       comentarios = data.map(c=>({autor:c[0], nombre:c[1], texto:c[2], rating:c[3], fecha:c[4]}));
@@ -194,7 +194,7 @@ function agregarComentario(){
   let rating = document.getElementById("rating").value;
   if(nombre=="" || texto=="") return;
   let fecha = new Date().toLocaleDateString();
-  fetch("https://script.google.com/macros/s/AKfycbyFujonEg8-RHoCeFH6Z1Hu0ft_aY5oSwq_pojIms3JyLt2XvZwDNB839r5I2umM7TraA/exec",{
+  fetch("https://script.google.com/macros/s/AKfycbxJvkACkg0bxTOptMsqBG4FDk9fddfEfVWVwEV8MUwKDi0NiJBX2HCEFeRLzz0c4ig1/exec",{
     method:"POST",
     body: JSON.stringify({id:usuarioID, nombre:nombre, comentario:texto, rating:rating, fecha:fecha})
   }).then(res=>res.json()).then(data=>{
