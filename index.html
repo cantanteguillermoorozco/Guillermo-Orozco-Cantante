@@ -58,12 +58,66 @@ footer{background:#000;text-align:center;padding:25px;color:#ffcc00;margin-top:5
 /* BOTÓN ESCRÍBENOS */
 .contact-btn{background:#ffcc00;color:#000;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:bold;display:inline-block;margin-top:15px;transition:0.3s;}
 .contact-btn:hover{background:#e6b800;}
+
+/* ESTILO EDITORIAL HISTORIA (Inspirado en André Maurois) */
+.historia-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: #1a1a1a; /* Fondo oscuro integrado */
+    position: relative;
+    padding: 0;
+}
+.historia-texto-col {
+    flex: 1;
+    padding: 60px 5%;
+    z-index: 2;
+    min-width: 300px;
+}
+.historia-content-box {
+    background: #2a2a2a; /* Cuadro de texto que resalta */
+    padding: 40px;
+    border-left: 5px solid #ffcc00; /* Detalle dorado */
+    margin-right: -100px; /* Superposición */
+    box-shadow: 20px 20px 60px rgba(0,0,0,0.5);
+}
+.historia-img-col {
+    flex: 1;
+    background-color: #3d0000; /* Fondo rojizo oscuro para la foto */
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+.img-editorial {
+    width: 130%;
+    height: 80%;
+    object-fit: cover;
+    border-radius: 50% 0 0 50%; /* Corte circular */
+    margin-left: 40px;
+    border: 8px solid #1a1a1a;
+}
+.historia-content-box h2 {
+    text-align: left !important;
+    margin-bottom: 25px;
+}
+.historia-content-box p {
+    color: #e0e0e0;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+@media (max-width: 991px) {
+    .historia-content-box { margin-right: 0; }
+    .historia-img-col { min-height: 400px; order: -1; }
+    .img-editorial { width: 100%; border-radius: 0; margin-left: 0; border: none; }
+}
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
 <div class="container">
 <a class="navbar-brand" href="index.html">
@@ -85,7 +139,6 @@ Guillermo Orozco
 </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
 <div id="carouselHero" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2500">
 <div class="carousel-inner">
@@ -102,7 +155,6 @@ Guillermo Orozco
 </div>
 </section>
 
-<!-- EVENTOS -->
 <section class="section-normal">
 <h2>Próximos Eventos</h2>
 <div class="container">
@@ -113,7 +165,7 @@ Guillermo Orozco
 <div class="card-body">
 <h4 class="card-title">Capilla San Salvador Nextengo</h4>
 <p class="card-text">15 de Marzo | 4:00 pm - 6:00 pm</p>
-<a href="https://www.google.com/maps/place/Capilla+del+Divino+Salvador+de+Nextengo/" target="_blank" class="btn btn-primary">Ver ubicación</a>
+<a href="https://www.google.com/maps/place/Capilla+del+Divino+Salvador+de+Nextengo/@19.472663,-99.1910053,17z/data=!3m1!4b1!4m6!3m5!1s0x85d1f8818d98e52b:0x366f87b7b2c7d7b2!8m2!3d19.472663!4d-99.1884304!16s%2Fg%2F11tfk_bpw4?entry=ttu&g_ep=EgoyMDI2MDMwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn btn-primary">Ver ubicación</a>
 </div>
 </div>
 </div>
@@ -132,7 +184,6 @@ Guillermo Orozco
 </div>
 </section>
 
-<!-- COMENTARIOS -->
 <section class="comentarios">
 <h2>Opiniones del Público</h2>
 <div class="container">
@@ -152,68 +203,87 @@ Guillermo Orozco
 </div>
 </section>
 
+
 <script>
 // ======= COMENTARIOS GOOGLE SHEETS =======
 let usuarioID = localStorage.getItem("usuarioID");
 if(!usuarioID){
-  usuarioID = "AKfycbzAWC_tThH9_v3AEy_VHPkX0Yj-wrnWlaGBRFDnrg4H49jOfiV8Qa9uT7fzLtIkTqvzKw"; // tu nuevo ID
-  localStorage.setItem("usuarioID", usuarioID);
+  usuarioID = "AKfycbzAWC_tThH9_v3AEy_VHPkX0Yj-wrnWlaGBRFDnrg4H49jOfiV8Qa9uT7fzLtIkTqvzKw"; // tu nuevo ID
+  localStorage.setItem("usuarioID", usuarioID);
 }
 
 let comentarios = [];
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbzAWC_tThH9_v3AEy_VHPkX0Yj-wrnWlaGBRFDnrg4H49jOfiV8Qa9uT7fzLtIkTqvzKw/exec";
 
 function mostrarComentarios(){
-  fetch(SHEET_URL)
-    .then(res => res.json())
-    .then(data => {
-      comentarios = data.map(c=>({autor:c[0], nombre:c[1], texto:c[2], rating:c[3], fecha:c[4]}));
-      let cont=document.getElementById("listaComentarios");
-      cont.innerHTML="";
-      comentarios.forEach((c,i)=>{
-        let estrellas="⭐".repeat(c.rating);
-        let boton="";
-        if(c.autor===usuarioID){
-          boton=`<button onclick="borrarComentario(${i})" class="btn btn-danger btn-sm btn-borrar"><i class="bi bi-trash"></i></button>`;
-        }
-        cont.innerHTML+=`
-        <div class="comentario-card">
-          ${boton}
-          <div class="comentario-nombre">${c.nombre}</div>
-          <div class="comentario-fecha">${c.fecha}</div>
-          <div class="estrellas">${estrellas}</div>
-          <p>${c.texto}</p>
-        </div>
-        `;
-      });
-    });
+  fetch(SHEET_URL)
+    .then(res => res.json())
+    .then(data => {
+      comentarios = data.map(c=>({autor:c[0], nombre:c[1], texto:c[2], rating:c[3], fecha:c[4]}));
+      let cont=document.getElementById("listaComentarios");
+      cont.innerHTML="";
+      comentarios.forEach((c,i)=>{
+        let estrellas="⭐".repeat(c.rating);
+        let boton="";
+        if(c.autor===usuarioID){
+          boton=`<button onclick="borrarComentario(${i})" class="btn btn-danger btn-sm btn-borrar"><i class="bi bi-trash"></i></button>`;
+        }
+        cont.innerHTML+=`
+        <div class="comentario-card">
+          ${boton}
+          <div class="comentario-nombre">${c.nombre}</div>
+          <div class="comentario-fecha">${c.fecha}</div>
+          <div class="estrellas">${estrellas}</div>
+          <p>${c.texto}</p>
+        </div>
+        `;
+      });
+    });
 }
 
 function agregarComentario(){
-  let nombre = document.getElementById("nombre").value;
-  let texto = document.getElementById("comentario").value;
-  let rating = document.getElementById("rating").value;
-  if(nombre=="" || texto=="") return;
-  let fecha = new Date().toLocaleDateString();
-  fetch(SHEET_URL,{
-    method:"POST",
-    body: JSON.stringify({id:usuarioID, nombre:nombre, comentario:texto, rating:rating, fecha:fecha})
-  }).then(res=>res.json()).then(data=>{
-    document.getElementById("nombre").value="";
-    document.getElementById("comentario").value="";
-    mostrarComentarios();
-  });
+  let nombre = document.getElementById("nombre").value;
+  let texto = document.getElementById("comentario").value;
+  let rating = document.getElementById("rating").value;
+  if(nombre=="" || texto=="") return;
+  let fecha = new Date().toLocaleDateString();
+  fetch(SHEET_URL,{
+    method:"POST",
+    body: JSON.stringify({id:usuarioID, nombre:nombre, comentario:texto, rating:rating, fecha:fecha})
+  }).then(res=>res.json()).then(data=>{
+    document.getElementById("nombre").value="";
+    document.getElementById("comentario").value="";
+    mostrarComentarios();
+  });
 }
 
 function borrarComentario(index){
-  comentarios.splice(index,1);
-  mostrarComentarios();
+  comentarios.splice(index,1);
+  mostrarComentarios();
 }
 
 mostrarComentarios();
 </script>
 
-<section class="contact-section">
+<section class="historia-wrapper">
+    <div class="historia-texto-col">
+        <div class="historia-content-box">
+            <h2>Historia y Trayectoria de Guillermo Orozco</h2>
+            <p><strong>Guillermo Orozco Muñoz</strong>, cantante profesional de 41 años originario de Azcapotzalco, Ciudad de México, ha forjado una destacada trayectoria artística a lo largo de más de 15 años. Desde 2012 ha participado activamente en los festejos patronales de la Parroquia de San Lucas Atenco y fue el cantante oficial del restaurante Pancita las Comadres entre 2017 y 2025.</p>
+            
+            <p>Su presencia en escenarios como el <strong>Foro Lenin</strong> y el <strong>Teatro Gran Recinto</strong> ha consolidado su carrera, donde cada presentación combina trío, mariachi o pista con una puesta en escena única, incorporando utilería que hace de cada espectáculo una experiencia inolvidable.</p>
+            
+            <p>Además de los grandes escenarios, Guillermo adapta su repertorio a todo tipo de eventos familiares y corporativos, colaborando también con la Alcaldía Azcapotzalco en espacios emblemáticos como el Jardín Hidalgo y el Parque de la China.</p>
+            
+            <p>Actualmente se prepara para su tercer concierto en el Teatro Gran Recinto Silver en 2027, mientras continúa promoviendo nuevos talentos emergentes en su desarrollo musical.</p>
+        </div>
+    </div>
+    <div class="historia-img-col">
+        <img src="https://scontent-qro1-1.xx.fbcdn.net/v/t51.82787-15/640562910_18568823092008268_6812746441020124105_n.webp?stp=dst-jpg_tt6&_nc_cat=103&ccb=1-7&_nc_sid=13d280&_nc_ohc=7QT2VOaEunYQ7kNvwGwPLWU&_nc_oc=Adnhch2vT63TgnwvIB-QEVMcsbr5ObZDnbYpmKPPxR8ODx2uZDQpixLeFp_YunXQNTMDIerkPAFQweMABxcsRKsF&_nc_zt=23&_nc_ht=scontent-qro1-1.xx&_nc_gid=LMLx1h99P4QJeWwv5mP9DA&_nc_ss=8&oh=00_AfymNgOziXBcjVo-VvOt8VkqKWl3jEFbxXiRFCTZSyEc0Q&oe=69B68D75" class="img-editorial" alt="Guillermo Orozco">
+    </div>
+</section>
+
+<section class="contact-section py-5">
 <div class="container">
 <div class="row align-items-center">
 <div class="col-md-6">
