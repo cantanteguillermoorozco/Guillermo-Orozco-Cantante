@@ -132,6 +132,55 @@ color:white;
 footer{background:#000;text-align:center;padding:25px;color:#ffcc00;margin-top:50px;}
 .contact-btn{background:#ffcc00;color:#000;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:bold;display:inline-block;margin-top:15px;transition:0.3s;}
 .contact-btn:hover{background:#e6b800;}
+
+.album-box{
+    display:flex;
+    gap:30px;
+    background:#181818;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 0 25px rgba(0,0,0,0.6);
+    align-items:flex-start;
+    flex-wrap:wrap;
+}
+
+.album-cover img{
+    width:220px;
+    border-radius:15px;
+}
+
+.album-info h3{
+    color:#ffcc00;
+    margin-bottom:5px;
+}
+
+.album-info p{
+    color:#aaa;
+    margin-bottom:20px;
+}
+
+.tracklist{
+    list-style:none;
+    padding:0;
+}
+
+.tracklist li{
+    padding:12px;
+    border-bottom:1px solid #333;
+    display:flex;
+    justify-content:space-between;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.tracklist li:hover{
+    background:#282828;
+}
+
+.tracklist span{
+    color:#aaa;
+}
+
 </style>
 </head>
 
@@ -178,16 +227,7 @@ footer{background:#000;text-align:center;padding:25px;color:#ffcc00;margin-top:5
     <h2>Próximos Eventos</h2>
     <div class="container">
         <div class="row g-4">
-            <div class="col-md-6">
-                <div class="card">
-                    <img src="evento1.jpeg" class="card-img-top" alt="Capilla San Salvador">
-                    <div class="card-body">
-                        <h4 class="card-title">Capilla San Salvador Nextengo</h4>
-                        <p class="card-text">15 de Marzo | 4:00 pm - 6:00 pm</p>
-                        <a href="https://www.google.com/maps/place/Capilla+del+Divino+Salvador+de+Nextengo/@19.472668,-99.1910053,17z/data=!3m1!4b1!4m6!3m5!1s0x85d1f8818d98e52b:0x366f87b7b2c7d7b2!8m2!3d19.472663!4d-99.1884304!16s%2Fg%2F11tfk_bpw4?entry=ttu&g_ep=EgoyMDI2MDMwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn btn-primary">Ver ubicación</a>
-                    </div>
-                </div>
-            </div>
+            
             <div class="col-md-6">
                 <div class="card">
                     <img src="evento2.jpeg" class="card-img-top" alt="Festival de Primavera">
@@ -196,6 +236,17 @@ footer{background:#000;text-align:center;padding:25px;color:#ffcc00;margin-top:5
                         <p class="card-text">28 de Marzo | 3:00 pm</p>
                         <p class="card-text">Centro Comercial Pabellón Azcapotzalco</p>
                         <a href="https://www.google.com/maps/place/Pabell%C3%B3n+Azcapotzalco/@19.4735125,-99.1923726,17z/data=!3m2!4b1!5s0x85d1f881de8e0099:0x4f74bb82de8a4547!4m6!3m5!1s0x85d1f881dfd26673:0x24b6723b2b8083ca!8m2!3d19.4735075!4d-99.1897977!16s%2Fg%2F11cksc3g96?entry=ttu&g_ep=EgoyMDI2MDMwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn btn-primary">Ver ubicación</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <img src="evento13feb.jpg" class="card-img-top" alt="Capilla San Salvador">
+                    <div class="card-body">
+                        <h4 class="card-title">2do festival del amor</h4>
+                        <p class="card-text">13 de febrero 2027  | 19:00 hrs</p>
+                         <p class="card-text">Teatro Gran Recinto Silver </p>
+                        <a href="https://www.google.com/maps/place/Centro+de+Convenciones+y+Teatro+Gran+Recinto/@19.5256951,-99.2287234,17z/data=!3m2!4b1!5s0x85d21d2cfe996e13:0xb65877bb3ccbe252!4m6!3m5!1s0x85d21d2cf884a6d5:0x47e9a7af5d1e3932!8m2!3d19.5256901!4d-99.2261485!16s%2Fg%2F11g6lxn3py?entry=ttu&g_ep=EgoyMDI2MDMxOC4xIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn btn-primary">Ver ubicación</a>
                     </div>
                 </div>
             </div>
@@ -218,6 +269,89 @@ footer{background:#000;text-align:center;padding:25px;color:#ffcc00;margin-top:5
     </div>
 </section>
 
+<section class="section-normal">
+    <h2>Álbums</h2>
+
+    <div class="container">
+        <div class="row g-4">
+
+            <!-- ÁLBUM 1 -->
+            <div class="col-md-6">
+                <div class="album-box">
+
+                    <div class="album-cover">
+                        <img src="Captura de pantalla 2026-03-23 210429.png" alt="Portada">
+                    </div>
+
+                    <div class="album-info">
+                        <h3>Contigo en la distancia</h3>
+                        <p>Guillermo Orozco</p>
+
+                        <ul class="tracklist">
+                            <li onclick="window.open('https://www.youtube.com/watch?v=10o6CNQp0Vw&list=RDLO4rrwRdasY&index=3')">
+                                ▶ Contigo en la distancia <span>3:27</span>
+                            </li>
+                            <li onclick="window.open('https://www.youtube.com/watch?v=A9noJFzV90Q&list=RDLO4rrwRdasY&index=4')">
+                                ▶ Me voy a quitar de en medio <span>2:46</span>
+                            </li>
+                            <li onclick="window.open('https://www.youtube.com/watch?v=A9noJFzV90Q&list=RDLO4rrwRdasY&index=4')">
+                                ▶ Amor de mis amores <span>3:14</span>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ÁLBUM 2 -->
+            <div class="col-md-6">
+                <div class="album-box">
+
+                    <div class="album-cover">
+                        <img src="Captura de pantalla 2026-03-23 211420.png" alt="Portada">
+                    </div>
+
+                    <div class="album-info">
+                        <h3>Guillermo Orozco en vivo</h3>
+                        <p>Guillermo Orozco</p>
+
+                        <div class="tracklist-grid">
+
+                            <ul class="tracklist">
+                                <li onclick="window.open('https://www.youtube.com/watch?v=33eWWTnuDgw&list=OLAK5uy_kUkN92_dap9XXvpfMJvzXj9Pcy0QrQ4wI&index=1')">
+                                    ▶ No volveré <span>3:10</span>
+                                </li>
+                                <li onclick="window.open('https://www.youtube.com/watch?v=DBqOcOwOilw&list=OLAK5uy_kUkN92_dap9XXvpfMJvzXj9Pcy0QrQ4wI&index=2')">
+                                    ▶ Mi mayor anhelo <span>3:21</span>
+                                </li>
+                                <li onclick="window.open('https://www.youtube.com/watch?v=G1gtG9rQJ3A&list=OLAK5uy_kUkN92_dap9XXvpfMJvzXj9Pcy0QrQ4wI&index=3')">
+                                    ▶ Sabor a mi <span>4:01</span>
+                                </li>
+                            </ul>
+
+                            <ul class="tracklist">
+                                <li onclick="window.open('https://www.youtube.com/watch?v=JWjKtdo9pLM&list=OLAK5uy_kUkN92_dap9XXvpfMJvzXj9Pcy0QrQ4wI&index=4')">
+                                    ▶ Unchained Melody <span>3:50</span>
+                                </li>
+                                <li onclick="window.open('https://www.youtube.com/watch?v=IBgB5RtufjU&list=OLAK5uy_kUkN92_dap9XXvpfMJvzXj9Pcy0QrQ4wI&index=5')">
+                                    ▶ Te seguiré <span>2:14</span>
+                                </li>
+                                <li onclick="window.open('https://www.youtube.com/watch?v=BDhHRG5w2eI&list=OLAK5uy_kUkN92_dap9XXvpfMJvzXj9Pcy0QrQ4wI&index=6')">
+                                    ▶ Dos tipos de cuidado coplas <span>3:55</span>
+                                </li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
 <section class="comentarios">
     <h2>Opiniones del Público</h2>
     <div class="container">

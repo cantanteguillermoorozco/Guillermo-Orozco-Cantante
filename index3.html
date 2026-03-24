@@ -153,6 +153,54 @@ footer{
     text-align:center;
     padding:30px;
     color:#ffcc00;
+
+}
+.album-box{
+    display:flex;
+    gap:30px;
+    background:#181818;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 0 25px rgba(0,0,0,0.6);
+    align-items:flex-start;
+    flex-wrap:wrap;
+}
+
+.album-cover img{
+    width:220px;
+    border-radius:15px;
+}
+
+.album-info h3{
+    color:#ffcc00;
+    margin-bottom:5px;
+}
+
+.album-info p{
+    color:#aaa;
+    margin-bottom:20px;
+}
+
+.tracklist{
+    list-style:none;
+    padding:0;
+}
+
+.tracklist li{
+    padding:12px;
+    border-bottom:1px solid #333;
+    display:flex;
+    justify-content:space-between;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.tracklist li:hover{
+    background:#282828;
+}
+
+.tracklist span{
+    color:#aaa;
 }
 
 </style>
@@ -189,13 +237,12 @@ Guillermo Orozco
 <h2>Último Lanzamiento</h2>
 
 <div class="youtube-container">
-<a href="https://www.youtube.com/watch?v=B0qxDAa3SbI" target="_blank" rel="noopener noreferrer">
-<img src="https://img.youtube.com/vi/B0qxDAa3SbI/maxresdefault.jpg" 
+<a href="https://www.youtube.com/watch?v=AqKVkCshZCs" target="_blank" rel="noopener noreferrer">
+<img src="https://img.youtube.com/vi/AqKVkCshZCs/maxresdefault.jpg" 
 alt="Último Video"
 style="width:100%; display:block;">
 </a>
 </div>
-
 <a href="https://www.youtube.com/@Guillermoorozcocantante" 
 target="_blank" 
 rel="noopener noreferrer"
@@ -203,6 +250,89 @@ class="youtube-btn">
 Ver Canal Oficial en YouTube
 </a>
 
+</section>
+<section class="section-normal">
+    <h2>Álbums</h2>
+
+    <div class="container">
+        <div class="row g-4">
+
+            <!-- ÁLBUM 1 -->
+            <div class="col-md-6">
+                <div class="album-box">
+
+                    <div class="album-cover">
+                        <img src="Captura de pantalla 2026-03-23 210429.png" alt="Portada">
+                    </div>
+
+                    <div class="album-info">
+                        <h3>Contigo en la distancia</h3>
+                        <p>Guillermo Orozco</p>
+
+                        <ul class="tracklist">
+                            <li onclick="window.open('https://www.youtube.com/watch?v=10o6CNQp0Vw&list=RDLO4rrwRdasY&index=3')">
+                                ▶ Contigo en la distancia <span>3:27</span>
+                            </li>
+                            <li onclick="window.open('https://www.youtube.com/watch?v=A9noJFzV90Q&list=RDLO4rrwRdasY&index=4')">
+                                ▶ Me voy a quitar de en medio <span>2:46</span>
+                            </li>
+                            <li onclick="window.open('https://www.youtube.com/watch?v=A9noJFzV90Q&list=RDLO4rrwRdasY&index=4')">
+                                ▶ Amor de mis amores <span>3:14</span>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ÁLBUM 2 -->
+            <div class="col-md-6">
+                <div class="album-box">
+
+                    <div class="album-cover">
+                        <img src="Captura de pantalla 2026-03-23 211420.png" alt="Portada">
+                    </div>
+
+                    <div class="album-info">
+                        <h3>Guillermo Orozco en vivo</h3>
+                        <p>Guillermo Orozco</p>
+
+                        <div class="tracklist-grid">
+
+                            <ul class="tracklist">
+                                <li onclick="window.open('https://www.youtube.com/watch?v=33eWWTnuDgw&list=OLAK5uy_kUkN92_dap9XXvpfMJvzXj9Pcy0QrQ4wI&index=1')">
+                                    ▶ No volveré <span>3:10</span>
+                                </li>
+                                <li onclick="window.open('https://www.youtube.com/watch?v=DBqOcOwOilw&list=OLAK5uy_kUkN92_dap9XXvpfMJvzXj9Pcy0QrQ4wI&index=2')">
+                                    ▶ Mi mayor anhelo <span>3:21</span>
+                                </li>
+                                <li onclick="window.open('https://www.youtube.com/watch?v=G1gtG9rQJ3A&list=OLAK5uy_kUkN92_dap9XXvpfMJvzXj9Pcy0QrQ4wI&index=3')">
+                                    ▶ Sabor a mi <span>4:01</span>
+                                </li>
+                            </ul>
+
+                            <ul class="tracklist">
+                                <li onclick="window.open('https://www.youtube.com/watch?v=JWjKtdo9pLM&list=OLAK5uy_kUkN92_dap9XXvpfMJvzXj9Pcy0QrQ4wI&index=4')">
+                                    ▶ Unchained Melody <span>3:50</span>
+                                </li>
+                                <li onclick="window.open('https://www.youtube.com/watch?v=IBgB5RtufjU&list=OLAK5uy_kUkN92_dap9XXvpfMJvzXj9Pcy0QrQ4wI&index=5')">
+                                    ▶ Te seguiré <span>2:14</span>
+                                </li>
+                                <li onclick="window.open('https://www.youtube.com/watch?v=BDhHRG5w2eI&list=OLAK5uy_kUkN92_dap9XXvpfMJvzXj9Pcy0QrQ4wI&index=6')">
+                                    ▶ Dos tipos de cuidado coplas <span>3:55</span>
+                                </li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
 </section>
 
 <section class="contact-section">
