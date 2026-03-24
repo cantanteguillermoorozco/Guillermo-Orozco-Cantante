@@ -181,6 +181,28 @@ footer{background:#000;text-align:center;padding:25px;color:#ffcc00;margin-top:5
     color:#aaa;
 }
 
+
+.contador-box{
+    text-align:center;
+    margin-top:15px;
+}
+
+#contadorVisitas{
+    color:#ffcc00;
+    font-weight:bold;
+    font-size:2.5rem;
+    transition:0.3s;
+}
+
+/* EFECTO GLOW */
+.glow{
+    text-shadow: 
+        0 0 5px #ffcc00,
+        0 0 10px #ffcc00,
+        0 0 20px #ff2e2e,
+        0 0 40px #ff2e2e;
+    transform: scale(1.1);
+}
 </style>
 </head>
 
@@ -391,8 +413,10 @@ footer{background:#000;text-align:center;padding:25px;color:#ffcc00;margin-top:5
                     <a href="https://open.spotify.com/artist/0xBKhW5pD1QD4DfzQnp2dS" target="_blank"><i class="bi bi-spotify"></i></a>
                 </div>
                 <div style="margin-top:15px; text-align:center;">
-    <p style="margin-bottom:5px;"> Visitas</p>
-    <h3 id="contadorVisitas" style="color:#ffcc00; font-weight:bold;">0</h3>
+<div class="contador-box">
+    <p>👀 Visitas</p>
+    <h3 id="contadorVisitas">0</h3>
+</div>
 </div>
             </div>
         </div>
@@ -461,26 +485,30 @@ mostrarComentarios();
 <script>
 let contadorElemento = document.getElementById("contadorVisitas");
 
-// número inicial (puedes cambiarlo)
 let visitas = localStorage.getItem("visitasGlobal") || 120;
-
-// aumenta visitas
 visitas++;
 localStorage.setItem("visitasGlobal", visitas);
 
-// animación tipo contador
 let inicio = 0;
 let fin = visitas;
-let duracion = 1000; // 1 segundo
+let duracion = 1200;
 
 let incremento = Math.ceil(fin / (duracion / 16));
 
 let intervalo = setInterval(() => {
     inicio += incremento;
 
+    // ACTIVAR GLOW
+    contadorElemento.classList.add("glow");
+
     if(inicio >= fin){
         inicio = fin;
         clearInterval(intervalo);
+
+        // quitar glow después
+        setTimeout(() => {
+            contadorElemento.classList.remove("glow");
+        }, 300);
     }
 
     contadorElemento.textContent = inicio.toLocaleString();
