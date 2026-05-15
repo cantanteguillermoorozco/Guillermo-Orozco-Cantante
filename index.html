@@ -180,29 +180,72 @@ footer{background:#000;text-align:center;padding:25px;color:#ffcc00;margin-top:5
 .tracklist span{
     color:#aaa;
 }
-
-
-.contador-box{
-    text-align:center;
-    margin-top:15px;
+/* CONTADOR VISITAS */
+.contador-visitas{
+    margin-top:25px;
+    display:flex;
+    justify-content:center;
 }
 
-#contadorVisitas{
+.contador-digital{
+    background:#111;
+    padding:12px 22px;
+    border-radius:14px;
+    border:2px solid #333;
+    box-shadow:
+        0 0 10px rgba(255,204,0,0.2),
+        inset 0 0 10px rgba(0,0,0,0.8);
+    display:flex;
+    align-items:center;
+    gap:15px;
+    animation: flotar 3s ease-in-out infinite;
+}
+
+.contador-label{
     color:#ffcc00;
+    font-size:0.9rem;
     font-weight:bold;
-    font-size:2.5rem;
+    letter-spacing:1px;
+}
+
+.contador-numeros{
+    display:flex;
+    gap:4px;
+}
+
+.digito{
+    width:38px;
+    height:52px;
+    background:#000;
+    border-radius:6px;
+    color:white;
+    font-size:2rem;
+    font-weight:bold;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Courier New', monospace;
+    box-shadow:
+        inset 0 -4px 0 rgba(255,255,255,0.08),
+        0 0 8px rgba(255,255,255,0.15);
     transition:0.3s;
 }
 
-/* EFECTO GLOW */
-.glow{
-    text-shadow: 
-        0 0 5px #ffcc00,
-        0 0 10px #ffcc00,
-        0 0 20px #ff2e2e,
-        0 0 40px #ff2e2e;
-    transform: scale(1.1);
+.digito.activo{
+    transform:scale(1.08);
+    box-shadow:
+        0 0 12px #ffcc00,
+        inset 0 -4px 0 rgba(255,255,255,0.1);
 }
+
+@keyframes flotar{
+    0%{transform:translateY(0px);}
+    50%{transform:translateY(-4px);}
+    100%{transform:translateY(0px);}
+}
+
+
+
 </style>
 </head>
 
@@ -230,6 +273,8 @@ footer{background:#000;text-align:center;padding:25px;color:#ffcc00;margin-top:5
 </nav>
 
 
+
+<!-- HERO -->
 <section class="hero">
     <div id="carouselHero" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2500">
         <div class="carousel-inner">
@@ -254,10 +299,10 @@ footer{background:#000;text-align:center;padding:25px;color:#ffcc00;margin-top:5
             
             <div class="col-md-6">
                 <div class="card">
-                    <img src="evento2.jpeg" class="card-img-top" alt="Festival de Primavera">
+                    <img src="guiller17.jfif" class="card-img-top" alt="Festival dia de las madres">
                     <div class="card-body">
-                        <h4 class="card-title">Festival de Primavera</h4>
-                        <p class="card-text">28 de Marzo | 3:00 pm</p>
+                        <h4 class="card-title">Festival para mamá</h4>
+                        <p class="card-text">17 de Mayo | 3:00 pm</p>
                         <p class="card-text">Centro Comercial Pabellón Azcapotzalco</p>
                         <a href="https://www.google.com/maps/place/Pabell%C3%B3n+Azcapotzalco/@19.4735125,-99.1923726,17z/data=!3m2!4b1!5s0x85d1f881de8e0099:0x4f74bb82de8a4547!4m6!3m5!1s0x85d1f881dfd26673:0x24b6723b2b8083ca!8m2!3d19.4735075!4d-99.1897977!16s%2Fg%2F11cksc3g96?entry=ttu&g_ep=EgoyMDI2MDMwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn btn-primary">Ver ubicación</a>
                     </div>
@@ -412,11 +457,23 @@ footer{background:#000;text-align:center;padding:25px;color:#ffcc00;margin-top:5
                     <a href="https://www.tiktok.com/@guillermoorozcocantante" target="_blank"><i class="bi bi-tiktok"></i></a>
                     <a href="https://open.spotify.com/artist/0xBKhW5pD1QD4DfzQnp2dS" target="_blank"><i class="bi bi-spotify"></i></a>
                 </div>
-                <div style="margin-top:15px; text-align:center;">
-<div class="contador-box">
-    <p>👀 Visitas</p>
-    <h3 id="contadorVisitas">0</h3>
-</div>
+<div class="contador-visitas">
+
+    <div class="contador-digital">
+
+        <div class="contador-label">
+            VISITAS
+        </div>
+
+        <div class="contador-numeros">
+            <div class="digito">0</div>
+            <div class="digito">0</div>
+            <div class="digito">0</div>
+            <div class="digito">0</div>
+        </div>
+
+    </div>
+
 </div>
             </div>
         </div>
@@ -483,36 +540,48 @@ mostrarComentarios();
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-let contadorElemento = document.getElementById("contadorVisitas");
 
-let visitas = localStorage.getItem("visitasGlobal") || 120;
+let visitas = 0;
+
 visitas++;
-localStorage.setItem("visitasGlobal", visitas);
+
+
 
 let inicio = 0;
 let fin = visitas;
-let duracion = 1200;
 
-let incremento = Math.ceil(fin / (duracion / 16));
+const digitos = document.querySelectorAll(".digito");
 
-let intervalo = setInterval(() => {
-    inicio += incremento;
+function actualizarContador(numero){
 
-    // ACTIVAR GLOW
-    contadorElemento.classList.add("glow");
+    let texto = numero.toString().padStart(4,"0");
+
+    texto.split("").forEach((num,index)=>{
+
+        digitos[index].textContent = num;
+
+        digitos[index].classList.add("activo");
+
+        setTimeout(()=>{
+            digitos[index].classList.remove("activo");
+        },200);
+
+    });
+
+}
+
+let intervalo = setInterval(()=>{
+
+    inicio++;
+
+    actualizarContador(inicio);
 
     if(inicio >= fin){
-        inicio = fin;
         clearInterval(intervalo);
-
-        // quitar glow después
-        setTimeout(() => {
-            contadorElemento.classList.remove("glow");
-        }, 300);
     }
 
-    contadorElemento.textContent = inicio.toLocaleString();
-}, 16);
+},40);
+
 </script>
 </body>
 </html>
